@@ -1,23 +1,49 @@
 plugins {
-    id("java")
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0'
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = 'org.example'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation( platform("org.junit:junit-bom:5.10.0"))
-    testImplementation ("org.junit.jupiter:junit-jupiter")
-    testImplementation ("org.seleniumhq.selenium:selenium-java:4.29.0")
-    testImplementation("org.assertj:assertj-core:4.0.0-M1")
-    testImplementation ("org.aeonbits.owner:owner:1.0.12")
+    // JUnit для тестов
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // Selenium для работы с браузером
+    implementation 'org.seleniumhq.selenium:selenium-java:4.29.0'
+
+    // Selenide для удобного тестирования через браузер
+    implementation 'com.codeborne:selenide:7.2.2'
+
+    // Owner для работы с properties файлами
+    implementation 'org.aeonbits.owner:owner:1.0.12'
+
+    // Утверждения для тестов
+    testImplementation 'org.assertj:assertj-core:4.0.0-M1'
+
+    // Allure для отчетности
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+    implementation 'io.qameta.allure:allure-rest-assured:2.29.1'
 }
 
-    tasks.test {
+tasks.test {
     useJUnitPlatform()
-        systemProperties(System.getProperties())
+
+    systemProperties(System.getProperties())
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
     }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

@@ -6,7 +6,8 @@ public class TestConfig {
     public String getBaseUrl(){
         return System.getProperty("baseUrl", BASE_URL);
     }
-    //public String getBaseUrlApi(){
-       // return System.getProperty("baseUrlApi", BASE_URL_API);
-   // }
+    public String getBaseUrlApi(){
+        return System.getProperty("baseUrlApi", BASE_URL_API);
+    }
+
 }

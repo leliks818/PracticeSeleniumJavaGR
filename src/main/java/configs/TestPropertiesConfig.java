@@ -1,6 +1,5 @@
 package configs;
 
-import constants.Constants;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
@@ -8,14 +7,6 @@ import org.aeonbits.owner.Config;
         "classpath:default.properties"
 })
 public interface TestPropertiesConfig extends Config {
-    @Key("baseUrlUi")
-    @DefaultValue(Constants.BASE_URL)
-    String getBaseUrl();
-
-    @Key("baseUrlApi")
-    @DefaultValue(Constants.BASE_URL_API)
-    String getBaseUrlApi();
-
 
     @Key("username")
     String getUsername();
@@ -23,9 +14,18 @@ public interface TestPropertiesConfig extends Config {
     @Key("password")
     String getPassword();
 
-    @Key("invalidUsername")
+    @Key("invalidLogin")
     String getInvalidUsername();
 
     @Key("invalidPassword")
     String getInvalidPassword();
+
+    @Key("browser")
+    String browser();
+
+    @Key("remoteUrl")
+    String remoteUrl();
+
+    @Key("baseUrl")
+    String baseUrl();
 }

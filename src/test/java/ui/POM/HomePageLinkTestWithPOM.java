@@ -1,11 +1,14 @@
-package ui;
+package ui.POM;
 
 import org.junit.jupiter.api.Test;
-import pages.HomePage;
+
+import pageObject.HomePage;
+import baseTests.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class HomePageLinkTestWithPOM extends BaseTest {
+
 
     @Test
     public void testWebFormLink() {
@@ -27,4 +30,5 @@ public class HomePageLinkTestWithPOM extends BaseTest {
         homePage.clickDropdownMenuLink();
         assertNotEquals("Страница не загрузилась: Dropdown menu", getDriver().getTitle());
     }
+
 }
