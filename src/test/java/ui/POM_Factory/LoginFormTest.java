@@ -17,7 +17,6 @@ public class LoginFormTest extends BaseTest {
 
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
-
     @BeforeEach
     public void setUpTest() {
         loginPage = new LoginPage(getDriver());

@@ -1,9 +1,11 @@
 package ui.POM_Factory;
 
-import pageObjectFactory.HomePage;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import baseTests.BaseTest;
+import pageObjectFactory.HomePage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {

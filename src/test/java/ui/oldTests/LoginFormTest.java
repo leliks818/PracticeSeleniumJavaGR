@@ -1,8 +1,8 @@
-package ui;
+package ui.oldTests;
 
+import baseTests.BaseTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import static constants.Constants.LOGIN_FORM_URL;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,8 +18,4 @@ public class LoginFormTest extends BaseTest {
         assertTrue(getDriver().findElement(By.xpath("//div[@id='invalid']")).isDisplayed());
 
     }
-
-
-
-
 }

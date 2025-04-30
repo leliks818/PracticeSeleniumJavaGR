@@ -31,9 +31,8 @@ public class BaseTest {
 
     @BeforeEach
     void setup() {
-        // Используем конфигурацию для запуска браузера
         driver = createWebDriver(configProperties.browser());
-        driver.get(BASE_URL);  // Получаем базовый URL из свойств
+        driver.get(BASE_URL);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -64,7 +63,7 @@ public class BaseTest {
         switch (browser.toLowerCase()) {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");  // Пример: запуск в headless режиме
+//                chromeOptions.addArguments("--headless");  // Пример: запуск в headless режиме
                 chromeOptions.addArguments("--start-maximized");
                 return new ChromeDriver(chromeOptions);
 
@@ -103,17 +102,11 @@ public class BaseTest {
         actions.moveToElement(element).click().perform();
     }
 
-    public void openPage(String url) {
-        getDriver().get(url);
-    }
-
-    // Для ожидания видимости элемента
     public void waitForElementToBeVisible(By locator, WebDriver driver, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    // Для ожидания кликабельности элемента
     public void waitForElementToBeClickable(By locator, WebDriver driver, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
