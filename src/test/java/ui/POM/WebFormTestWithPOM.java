@@ -1,8 +1,13 @@
 package ui.POM;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.WebForm1Page;
 import baseTests.BaseTest;
+
+import java.time.Duration;
 
 import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;
@@ -49,11 +54,17 @@ public class WebFormTestWithPOM extends BaseTest {
     }
 
     @Test
-    public void testReturnLink()  {
+    public void testReturnLink() {
         getDriver().get(WEB_FORM_URL);
         WebForm1Page page = new WebForm1Page(getDriver());
-        page.clickReturnLink();
-        assertNotEquals("Web form", getDriver().getTitle(), "Ссылка не работает!");
+        page.clickReturnLink(); // переход на другую страницу
+        getDriver().navigate().back();
+        // Ждем появления заголовка после возврата
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[normalize-space()='Web form']")));
+        // Проверка заголовка
+        assertTrue(page.getSubmitTitleReturnLink().contains("Web form"),
+                "Заголовок не содержит ожидаемое сообщение!");
     }
 
     @Test
@@ -105,14 +116,16 @@ public class WebFormTestWithPOM extends BaseTest {
     }
 
     @Test
-    public void testFormSubmission() {
+    public void testFormSubmission() throws InterruptedException {
         getDriver().get(WEB_FORM_URL);
         WebForm1Page page = new WebForm1Page(getDriver());
-       page.enterText(TEXT_INPUT);
-       page.enterPassword(PASSWORD);
+        page.enterText(TEXT_INPUT);
+        page.enterPassword(PASSWORD);
         page.clickSubmit();
-        getWait10();
+        Thread.sleep(2000);
         assertTrue(page.getSubmitTitle().contains("Form submitted"), "Заголовок не содержит ожидаемое сообщение!");
         assertTrue(page.isReceivedDisplayed(), "Сообщение не отображается");
+
+
     }
 }

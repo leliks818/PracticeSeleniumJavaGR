@@ -1,5 +1,6 @@
-package ui;
+package ui.oldTests;
 
+import baseTests.BaseTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

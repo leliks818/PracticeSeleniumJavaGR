@@ -1,8 +1,14 @@
 package ui.POM_Factory;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pageObject.WebForm1Page;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import baseTests.BaseTest;
+import pageObjectFactory.WebFormPage;
+
+import java.time.Duration;
 
 import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;
@@ -10,101 +16,95 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WebFormTest extends BaseTest {
 
-    private WebForm1Page getPage() {
+    private WebFormPage webFormPage;
+
+    @BeforeEach
+    public void setUpTest() {
         getDriver().get(WEB_FORM_URL);
-        return new WebForm1Page(getDriver());
+        webFormPage = new WebFormPage(getDriver());
     }
 
     @Test
     public void testTextInput() {
-        WebForm1Page page = getPage();
-        page.enterText(TEXT_INPUT);
-        assertEquals(TEXT_INPUT, page.getTextFieldValue());
+        webFormPage.enterText(TEXT_INPUT);
+        assertEquals(TEXT_INPUT, webFormPage.getTextFieldValue());
     }
 
     @Test
     public void testPasswordField() {
-        WebForm1Page page = getPage();
-        page.enterPassword(PASSWORD);
-        assertEquals(PASSWORD, page.getPasswordValue());
+        webFormPage.enterPassword(PASSWORD);
+        assertEquals(PASSWORD, webFormPage.getPasswordValue());
     }
 
     @Test
     public void testTextareaField() {
-        WebForm1Page page = getPage();
-        page.enterTextarea(TEXTAREA);
-        assertEquals(TEXTAREA, page.getTextareaValue());
+        webFormPage.enterTextarea(TEXTAREA);
+        assertEquals(TEXTAREA, webFormPage.getTextareaValue());
     }
 
     @Test
     public void testDisabledInput() {
-        WebForm1Page page = getPage();
-        assertFalse(page.isDisabledInputEnabled(), "Поле не должно быть активно!");
+        assertFalse(webFormPage.isDisabledInputEnabled(), "Поле не должно быть активно!");
     }
 
     @Test
     public void testReadonlyInput() {
-        WebForm1Page page = getPage();
-        assertTrue(page.isReadonlyPresent(), "Поле должно быть readonly!");
+        assertTrue(webFormPage.isReadonlyPresent(), "Поле должно быть readonly!");
     }
 
     @Test
     public void testReturnLink() {
-        WebForm1Page page = getPage();
-        page.clickReturnLink();
-        assertNotEquals("Web form", getDriver().getTitle(), "Ссылка не работает!");
+        webFormPage.clickReturnLink();
+        getDriver().navigate().back();
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[normalize-space()='Web form']")));
+        assertTrue(webFormPage.getSubmitTitleReturnLink().contains("Web form"),
+                "Заголовок не содержит ожидаемое сообщение!");
     }
 
     @Test
     public void testSelectOption() {
-        WebForm1Page page = getPage();
-        page.selectOption(SELECT_OPTION);
-        assertEquals(SELECT_OPTION, page.getSelectedOption());
+        webFormPage.selectOption(SELECT_OPTION);
+        assertEquals(SELECT_OPTION, webFormPage.getSelectedOption());
     }
 
     @Test
     public void testFileUpload() {
-        WebForm1Page page = getPage();
-        page.uploadFile(FILE_PATH);
-        assertTrue(page.getUploadedFilePath().contains("java.png"));
+        webFormPage.uploadFile(FILE_PATH);
+        assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
     }
 
     @Test
     public void testColorPicker() {
-        WebForm1Page page = getPage();
-        page.pickColor(COLOR_PICKER);
-        assertEquals(COLOR_PICKER, page.getColorValue());
+        webFormPage.pickColor(COLOR_PICKER);
+        assertEquals(COLOR_PICKER, webFormPage.getColorValue());
     }
 
     @Test
     public void testDateInput() {
-        WebForm1Page page = getPage();
-        page.enterDate(DATE_INPUT);
-        assertEquals(DATE_INPUT, page.getDateValue());
+        webFormPage.enterDate(DATE_INPUT);
+        assertEquals(DATE_INPUT, webFormPage.getDateValue());
     }
 
     @Test
     public void testCheckbox() {
-        WebForm1Page page = getPage();
-        page.clickCheckbox();
-        assertTrue(page.isCheckboxSelected());
+        webFormPage.clickCheckbox();
+        assertTrue(webFormPage.isCheckboxSelected());
     }
 
     @Test
     public void testRadioButton() {
-        WebForm1Page page = getPage();
-        page.clickRadioButton();
-        assertTrue(page.isRadioButtonSelected());
+        webFormPage.clickRadioButton();
+        assertTrue(webFormPage.isRadioButtonSelected());
     }
 
     @Test
     public void testFormSubmission() {
-        WebForm1Page page = getPage();
-        page.enterText(TEXT_INPUT);
-        page.enterPassword(PASSWORD);
-        page.clickSubmit();
+        webFormPage.enterText(TEXT_INPUT);
+        webFormPage.enterPassword(PASSWORD);
+        webFormPage.clickSubmit();
         getWait10();
-        assertTrue(page.getSubmitTitle().contains("Form submitted"), "Заголовок не содержит ожидаемое сообщение!");
-        assertTrue(page.isReceivedDisplayed(), "Сообщение не отображается");
+        assertTrue(webFormPage.getSubmitTitle().contains("Form submitted"), "Заголовок не содержит ожидаемое сообщение!");
+        assertTrue(webFormPage.isReceivedDisplayed(), "Сообщение не отображается");
     }
 }

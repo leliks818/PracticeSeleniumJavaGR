@@ -43,3 +43,7 @@ bin/
 
 #properties
 src/test/resources/*.properties
+
+#unit example eASY
+/src/main/java/org/example/
+/src/test/java/unit/
