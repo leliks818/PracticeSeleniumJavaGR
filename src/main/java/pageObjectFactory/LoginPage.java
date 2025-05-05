@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     private final WebDriver driver;
 
@@ -23,6 +23,7 @@ public class LoginPage {
     private WebElement successMessage;
 
     public LoginPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
     private final WebDriver driver;
 
     private final By usernameInput = By.id("username");
@@ -17,6 +17,7 @@ public class LoginPage {
     private final By successMessage = By.xpath("//div[@id='success']");
 
     public LoginPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

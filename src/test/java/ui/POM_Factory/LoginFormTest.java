@@ -23,12 +23,12 @@ public class LoginFormTest extends BaseTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws InterruptedException {
         loginPage.open(LOGIN_FORM_URL);
         loginPage.enterUsername(config.getUsername());
         loginPage.enterPassword(config.getPassword());
         loginPage.clickLogin();
-        getWait10();
+        Thread.sleep(2000);
         assertTrue(loginPage.isLoginSuccessful(), "Сообщение об успешном входе не появилось");
     }
 }

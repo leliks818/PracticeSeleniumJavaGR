@@ -1,9 +1,7 @@
 package constants;
 
-import org.junit.jupiter.api.Test;
 
 public class Constants {
-
 
     public static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     public static final String COOKIES_URL = BASE_URL + "cookies";
@@ -18,7 +16,6 @@ public class Constants {
     public static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator";
     public static final String WEB_FORM_URL = BASE_URL + "web-form";
     public static final String LOGIN_FORM_URL = BASE_URL + "login-form";
-
 
     public static final String BASE_URL_API = "https://petstore.swagger.io/v2/";
 }

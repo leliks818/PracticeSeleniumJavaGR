@@ -4,7 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
+public class HomePage extends BasePage{
 
     @FindBy(linkText = "Web form")
     private WebElement webFormLink;
@@ -41,9 +41,9 @@ public class HomePage {
 
     // Конструктор инициализации локаторов
     public HomePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
-
 
     public void clickWebFormLink() {
         webFormLink.click();
