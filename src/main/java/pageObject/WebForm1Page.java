@@ -1,16 +1,16 @@
 package pageObject;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.Select;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class WebForm1Page {
+public class WebForm1Page extends BasePage {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
@@ -36,9 +36,9 @@ public class WebForm1Page {
     private final By receivedMessage = By.xpath("//p[@class='lead']");
 
     public WebForm1Page(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        PageFactory.initElements(driver, this);  // Инициализация элементов с помощью PageFactory
     }
 
         @Step("Введите текст '{text}' в поле Text Field")
@@ -80,8 +80,8 @@ public class WebForm1Page {
         public boolean isReadonlyPresent() {
             return driver.findElement(readonlyInput).getDomAttribute("readonly") != null;
         }
-    @Step("Нажать ссылку Return to index")
-    public void clickReturnLink() {
+        @Step("Нажать ссылку Return to index")
+       public void clickReturnLink() {
         driver.findElement(returnLink).click();
     }
 

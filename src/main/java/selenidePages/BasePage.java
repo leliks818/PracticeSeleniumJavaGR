@@ -16,10 +16,6 @@ public abstract class BasePage {
         return title();
     }
 
-    public void scrollTo(SelenideElement element) {
-        element.scrollIntoView(true);
-    }
-
     // Ожидание, пока элемент не станет видимым
     public void waitUntilVisible(SelenideElement element) {
         element.shouldBe(Condition.visible);

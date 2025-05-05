@@ -28,7 +28,7 @@ public class BaseTest {
     protected WebDriverWait wait10;
     protected WebDriver driver;
     protected TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-
+    public static  String TITLE_HEADER = "Hands-On Selenium WebDriver with Java";
     @BeforeEach
     void setup() {
         driver = createWebDriver(configProperties.browser());
@@ -45,6 +45,7 @@ public class BaseTest {
             driver.quit();
         }
     }
+
 
     protected WebDriver getDriver() {
         return driver;
@@ -86,10 +87,6 @@ public class BaseTest {
     public void clickWithActions(WebElement element) {
         Actions actions = new Actions(getDriver());
         actions.click(element).perform();
-    }
-
-    public void simpleClick(By locator) {
-        getDriver().findElement(locator).click();
     }
 
     public static void moveAndClickWithJS(WebDriver driver, WebElement element) {

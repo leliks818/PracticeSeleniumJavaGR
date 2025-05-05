@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-public class HomePage {
+public class HomePage extends BasePage {
 
     private final WebDriver driver;
 
@@ -25,6 +25,7 @@ public class HomePage {
     private final By headerTitle = By.xpath("//h1[@class='display-4']");
 
     public HomePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

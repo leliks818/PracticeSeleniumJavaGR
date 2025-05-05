@@ -99,11 +99,11 @@ public class WebFormTest extends BaseTest {
     }
 
     @Test
-    public void testFormSubmission() {
+    public void testFormSubmission() throws InterruptedException {
         webFormPage.enterText(TEXT_INPUT);
         webFormPage.enterPassword(PASSWORD);
         webFormPage.clickSubmit();
-        getWait10();
+        Thread.sleep(1000);
         assertTrue(webFormPage.getSubmitTitle().contains("Form submitted"), "Заголовок не содержит ожидаемое сообщение!");
         assertTrue(webFormPage.isReceivedDisplayed(), "Сообщение не отображается");
     }

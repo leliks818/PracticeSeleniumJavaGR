@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {
 
-    private HomePage homePage;
+  private HomePage homePage;
 
     @BeforeEach
     public void setUpTest() {
-        homePage = new HomePage(getDriver()); /// Инициализация перед каждым тестом надо ли
-    }
+      homePage = new HomePage(getDriver()); /// Инициализация перед каждым тестом надо ли
+   }
 
     @Test
     public void testWebFormLink() {

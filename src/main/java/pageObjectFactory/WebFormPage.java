@@ -9,11 +9,12 @@ import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
-public class WebFormPage {
+public class WebFormPage extends BasePage {
 
     private final WebDriver driver;
 
     public WebFormPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this); // Инициализация всех элементов с @FindBy
     }
