@@ -8,43 +8,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import patterns.WebDriverFactory;
 
 import java.time.Duration;
 
-import static constants.Constants.BASE_URL;
 
-
-public class BaseTest {
+public abstract class BaseTest {
 
     protected WebDriverWait wait5;
     protected WebDriverWait wait10;
     protected WebDriver driver;
     protected TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    public static  String TITLE_HEADER = "Hands-On Selenium WebDriver with Java";
+    public static String TITLE_HEADER = "Hands-On Selenium WebDriver with Java";
+
     @BeforeEach
     void setup() {
-        driver = createWebDriver(configProperties.browser());
-        driver.get(BASE_URL);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver = WebDriverFactory.createWebDriver(configProperties.browser());
+        driver.manage().window().maximize();
+        driver.get(configProperties.baseUrl());  // Открытие базового URL
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));  // Установка времени ожидания
+
+        // Инициализация ожиданий
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
-
     }
 
     @AfterEach
     void tearDown() {
         if (driver != null) {
-            driver.quit();
+            driver.quit();  // Закрытие драйвера после каждого теста
         }
     }
+
 
 
     protected WebDriver getDriver() {
@@ -55,27 +53,8 @@ public class BaseTest {
         return wait5;
     }
 
-    protected WebDriverWait getWait10() {
+    public WebDriverWait getWait10() {
         return wait10;
-    }
-
-    // Метод для создания WebDriver в зависимости от браузера
-    protected WebDriver createWebDriver(String browser) {
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-//                chromeOptions.addArguments("--headless");  // Пример: запуск в headless режиме
-                chromeOptions.addArguments("--start-maximized");
-                return new ChromeDriver(chromeOptions);
-
-            case "firefox":
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--headless");  // Пример: запуск в headless режиме
-                return new FirefoxDriver(firefoxOptions);
-
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
-        }
     }
 
 

@@ -21,29 +21,31 @@ import static com.codeborne.selenide.Browsers.FIREFOX;
 public class WebDriverFactory {
     static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
-    public static WebDriver createWebDriver(String browser) {
-        WebDriver driver = switch (browser.toLowerCase()) {
-            case CHROME -> getChromeDriver();
-            case FIREFOX -> new FirefoxDriver();
-            case EDGE -> new EdgeDriver();
-            // Добавьте другие браузеры по необходимости
-            default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
-        };
-        driver.manage().window().maximize();
-        return driver;
-    }
+
+public static WebDriver createWebDriver(String browser) {
+    WebDriver driver = switch (browser.toLowerCase()) {
+        case CHROME -> getChromeDriver();
+        case FIREFOX -> new FirefoxDriver();
+        case EDGE -> new EdgeDriver();
+        // Добавьте другие браузеры по необходимости
+        default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+    };
+    driver.manage().window().maximize();
+    return driver;
+}
 
     private static WebDriver getChromeDriver() {
         WebDriver driver;
         String remoteUrl = configProperties.remoteUrl();
 
-        if (remoteUrl != null) {
+        if (remoteUrl != null && !remoteUrl.isBlank()) {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");  // Add headless mode
-            options.addArguments("--disable-gpu"); // Switch off GPU, because we don't need it in headless mode
-            options.addArguments("--no-sandbox"); // Switch off sandbox to prevent access rights issues
-            options.addArguments("--disable-dev-shm-usage"); // Use /tmp instead of /dev/shm
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
             options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
+
             try {
                 driver = new RemoteWebDriver(new URL(remoteUrl), options);
             } catch (MalformedURLException e) {
@@ -54,4 +56,5 @@ public class WebDriverFactory {
         }
         return driver;
     }
+
 }

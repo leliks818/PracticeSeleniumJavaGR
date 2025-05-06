@@ -1,5 +1,6 @@
 package ui.POM;
 
+import constants.TestData;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -79,7 +80,7 @@ public class WebFormTestWithPOM extends BaseTest {
     public void testFileUpload() {
         getDriver().get(WEB_FORM_URL);
         WebForm1Page page = new WebForm1Page(getDriver());
-        page.uploadFile(FILE_PATH);
+        page.uploadFile(TestData.FILE_PATH);
         assertTrue(page.getUploadedFilePath().contains("java.png"));
     }
 
