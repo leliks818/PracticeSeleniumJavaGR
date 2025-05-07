@@ -8,6 +8,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.io.File;
 import java.time.Duration;
 
 public class WebForm1Page extends BasePage {
@@ -85,11 +88,10 @@ public class WebForm1Page extends BasePage {
         driver.findElement(returnLink).click();
     }
 
-    @Step("Получить заголовок после возврата")
-    public String getSubmitTitleReturnLink() {
+        @Step("Получить заголовок после возврата")
+        public String getSubmitTitleReturnLink() {
         return driver.findElement(submitTitleReturnLink).getText();
     }
-
 
         @Step("Выбрать опцию '{option}' из списка")
         public void selectOption(String option) {
@@ -111,10 +113,12 @@ public class WebForm1Page extends BasePage {
             return driver.findElement(datalistInput).getAttribute("value");
         }
 
-        @Step("Загрузить файл '{path}'")
-        public void uploadFile(String path) {
-            driver.findElement(fileInput).sendKeys(path);
-        }
+        @Step("Загрузить файл")
+        public void uploadFile(String filePath) {
+        String absolutePath = new File(filePath).getAbsolutePath();
+        WebElement fileInput = driver.findElement(By.name("my-file")); // замени локатор при необходимости
+        fileInput.sendKeys(absolutePath);
+    }
 
         @Step("Получить путь загруженного файла")
         public String getUploadedFilePath() {
@@ -171,7 +175,6 @@ public class WebForm1Page extends BasePage {
             WebElement slide = driver.findElement(slider);
             new Actions(driver).clickAndHold(slide).moveByOffset(offset, 0).release().perform();
         }
-
         @Step("Нажать кнопку Submit")
         public void clickSubmit() {
             driver.findElement(submitButton).click();

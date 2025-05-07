@@ -1,7 +1,5 @@
 package ui.POM_Factory;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import baseTests.BaseTest;
 import pageObjectFactory.HomePage;
@@ -10,77 +8,72 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {
 
-  private HomePage homePage;
-
-    @BeforeEach
-    public void setUpTest() {
-      homePage = new HomePage(getDriver()); /// Инициализация перед каждым тестом надо ли
-   }
-
     @Test
     public void testWebFormLink() {
-
+       HomePage homePage = new HomePage(getDriver());
         homePage.clickWebFormLink();
-        assertNotEquals("Страница не загрузилась: Web form", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Web form"));
     }
 
     @Test
     public void testNavigationLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickNavigationLink();
-        assertNotEquals("Страница не загрузилась: Navigation", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Navigation"));
     }
 
     @Test
     public void testDropdownMenuLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickDropdownMenuLink();
-        assertNotEquals("Страница не загрузилась: Dropdown menu", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Dropdown menu"));
     }
 
     @Test
     public void testMouseOverLink() {
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickMouseOverLink();
-        assertNotEquals("Страница не загрузилась: Mouse over", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Mouse over"));
     }
 
     @Test
     public void testDragAndDropLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickDragAndDropLink();
-        assertNotEquals("Страница не загрузилась: Drag and drop", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Drag and drop"));
     }
 
     @Test
     public void testDrawInCanvasLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickDrawInCanvasLink();
-        assertNotEquals("Страница не загрузилась: Draw in canvas", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Draw in canvas"));
     }
 
     @Test
     public void testLoadingImagesLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickLoadingImagesLink();
-        assertNotEquals("Страница не загрузилась: Loading images", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Loading images"));
     }
 
     @Test
     public void testSlowCalculatorLink() {
-
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickSlowCalculatorLink();
-        assertNotEquals("Страница не загрузилась: Slow calculator", getDriver().getTitle());
+        assertTrue(homePage.isPageLoaded("Страница не загрузилась: Slow calculator"));
     }
 
     @Test
     public void testHeader() {
-
+        HomePage homePage = new HomePage(getDriver());
         String headerTitle = homePage.getHeaderTitle();
         assertEquals("Hands-On Selenium WebDriver with Java", headerTitle);
     }
 
     @Test
     public void testNavigationPageLink() {
+        HomePage homePage = new HomePage(getDriver());
         assertNotNull(homePage, "HomePage не был инициализирован");
         homePage.clickNavigationButton();
         homePage.clickBackToIndexLink();

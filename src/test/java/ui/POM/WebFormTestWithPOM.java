@@ -1,5 +1,6 @@
 package ui.POM;
 
+import constants.TestData;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -59,7 +60,7 @@ public class WebFormTestWithPOM extends BaseTest {
         WebForm1Page page = new WebForm1Page(getDriver());
         page.clickReturnLink(); // переход на другую страницу
         getDriver().navigate().back();
-        // Ждем появления заголовка после возврата
+        // Ждем заголовка после возврата
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[normalize-space()='Web form']")));
         // Проверка заголовка
@@ -79,7 +80,7 @@ public class WebFormTestWithPOM extends BaseTest {
     public void testFileUpload() {
         getDriver().get(WEB_FORM_URL);
         WebForm1Page page = new WebForm1Page(getDriver());
-        page.uploadFile(FILE_PATH);
+        page.uploadFile(TestData.FILE_PATH);
         assertTrue(page.getUploadedFilePath().contains("java.png"));
     }
 
@@ -123,9 +124,9 @@ public class WebFormTestWithPOM extends BaseTest {
         page.enterPassword(PASSWORD);
         page.clickSubmit();
         Thread.sleep(2000);
+
         assertTrue(page.getSubmitTitle().contains("Form submitted"), "Заголовок не содержит ожидаемое сообщение!");
         assertTrue(page.isReceivedDisplayed(), "Сообщение не отображается");
-
 
     }
 }

@@ -4,19 +4,16 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
+import java.io.File;
 import java.time.Duration;
 
 public class WebFormPage extends BasePage {
 
-    private final WebDriver driver;
-
     public WebFormPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
-        PageFactory.initElements(driver, this); // Инициализация всех элементов с @FindBy
+
     }
 
     @FindBy(name = "my-text")
@@ -75,6 +72,10 @@ public class WebFormPage extends BasePage {
     private WebElement receivedMessage;
 
     // ========== Методы (Steps) ==========
+//    @Step("Open WebFormPage")
+//    public static void openUrl(String webFormUrl, WebDriver driver) {
+//        driver.get(webFormUrl);
+//    }
 
     @Step("Ввод текста в текстовое поле: {text}")
     public void enterText(String text) {
@@ -115,6 +116,7 @@ public class WebFormPage extends BasePage {
     public void clickReturnLink() {
         returnLink.click();
     }
+
     @Step("Получить заголовок после возврата")
     public String getSubmitTitleReturnLink() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -142,8 +144,11 @@ public class WebFormPage extends BasePage {
 
     @Step("Загрузка файла: {path}")
     public void uploadFile(String path) {
-        fileInput.sendKeys(path);
+        File file = new File(path);
+        String absolutePath = file.getAbsolutePath();
+        fileInput.sendKeys(absolutePath);
     }
+
 
     public String getUploadedFilePath() {
         return fileInput.getAttribute("value");

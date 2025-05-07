@@ -7,13 +7,12 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     private final SelenideElement usernameInput = $("#username");
     private final SelenideElement passwordInput = $("#password");
     private final SelenideElement loginButton = $("button[type='submit']");
     private final SelenideElement successMessage = $("#success");
-
 
     private final String loginUrl = "https://bonigarcia.dev/selenium-webdriver-java/login-form.html";
 

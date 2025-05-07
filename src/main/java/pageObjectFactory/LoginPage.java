@@ -4,11 +4,9 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
-
-    private final WebDriver driver;
 
     @FindBy(id = "username")
     private WebElement usernameInput;
@@ -22,12 +20,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@id='success']")
     private WebElement successMessage;
 
+    //constractor
     public LoginPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
+    }
     @Step("Открываем страницу по URL: {url}")
     public void open(String url) {
         driver.get(url);
@@ -50,6 +47,7 @@ public class LoginPage extends BasePage {
 
     @Step("Ожидаем появления сообщения об успешном входе")
     public boolean isLoginSuccessful() {
+        wait.until(ExpectedConditions.visibilityOf(successMessage));
         return successMessage.isDisplayed();
     }
 }
