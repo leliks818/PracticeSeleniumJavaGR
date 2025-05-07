@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-public class LoginLombok {
+public class LoginLombokPage {
 
     @Data /// Генерирует геттеры, сеттеры, toString(), equals(), hashCode()
     @Builder(toBuilder = true) /// Позволяет использовать Builder и toBuilder для изменения объектов и клона

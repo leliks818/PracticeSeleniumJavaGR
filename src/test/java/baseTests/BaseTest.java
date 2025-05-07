@@ -50,7 +50,7 @@ public abstract class BaseTest {
         return wait5;
     }
 
-    public WebDriverWait getWait10() {
+    protected WebDriverWait getWait10() {
         return wait10;
     }
 
