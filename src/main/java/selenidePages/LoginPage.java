@@ -14,7 +14,6 @@ public class LoginPage extends BasePage {
     private final SelenideElement loginButton = $("button[type='submit']");
     private final SelenideElement successMessage = $("#success");
 
-
     private final String loginUrl = "https://bonigarcia.dev/selenium-webdriver-java/login-form.html";
 
     @Step("Открываем страницу логина")

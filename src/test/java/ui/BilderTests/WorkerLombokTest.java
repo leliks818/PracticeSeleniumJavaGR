@@ -68,12 +68,12 @@ public class WorkerLombokTest {
                     .salary(8000.0)
                     .build();
 
-            // Клонируем объект и изменяем только оклад
+            // Клонирование объекта и изменяем только оклад
             Worker clonedWorker = worker.toBuilder()
                     .salary(8500.0)
                     .build();
 
-            // Проверка, что оклад изменился, а остальные параметры остались теми же
+            // Проверяем что оклад изменился, а остальные параметры остались теми же
             assertNotEquals(worker.getSalary(), clonedWorker.getSalary());
             assertEquals("Bob", clonedWorker.getName());
             assertEquals("Architect", clonedWorker.getPosition());

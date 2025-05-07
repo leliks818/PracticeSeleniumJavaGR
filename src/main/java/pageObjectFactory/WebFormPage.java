@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.*;
 import java.io.File;
 import java.time.Duration;
 
-
 public class WebFormPage extends BasePage {
 
     public WebFormPage(WebDriver driver) {
@@ -117,6 +116,7 @@ public class WebFormPage extends BasePage {
     public void clickReturnLink() {
         returnLink.click();
     }
+
     @Step("Получить заголовок после возврата")
     public String getSubmitTitleReturnLink() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

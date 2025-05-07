@@ -20,12 +20,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@id='success']")
     private WebElement successMessage;
 
-
+    //constractor
     public LoginPage(WebDriver driver) {
         super(driver);
 
     }
-
     @Step("Открываем страницу по URL: {url}")
     public void open(String url) {
         driver.get(url);

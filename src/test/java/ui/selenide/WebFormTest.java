@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import selenidePages.BasePage;
 import selenidePages.WebFormPage;
-
 import static com.codeborne.selenide.Selenide.*;
 import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;

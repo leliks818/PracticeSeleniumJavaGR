@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {
 
-
     @Test
     public void testWebFormLink() {
        HomePage homePage = new HomePage(getDriver());

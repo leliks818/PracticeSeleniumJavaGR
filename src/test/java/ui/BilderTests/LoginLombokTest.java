@@ -21,7 +21,7 @@ public class LoginLombokTest {
         assertEquals("initial_password", user.getPassword());
     }
 
-    // Тест 2: Проверка изменения пароля через toBuilder
+    // Тест 2: Проверка изменения юзера через toBuilder
     @Test
     public void testChangePasswordUsingToBuilder() {
         // Создание пользователя через Builder
@@ -40,5 +40,4 @@ public class LoginLombokTest {
         assertEquals("Ira123", updatedUser.getPassword());  // Новый username должен быть обновлён
         assertNotEquals(user.getUser(), updatedUser.getUser());  // username должен измениться
     }
-
     }

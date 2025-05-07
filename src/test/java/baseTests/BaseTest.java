@@ -12,7 +12,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import patterns.WebDriverFactory;
-
 import java.time.Duration;
 
 
@@ -42,8 +41,6 @@ public abstract class BaseTest {
             driver.quit();  // Закрытие драйвера после каждого теста
         }
     }
-
-
 
     protected WebDriver getDriver() {
         return driver;

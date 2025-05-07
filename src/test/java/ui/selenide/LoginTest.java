@@ -6,7 +6,6 @@ import selenidePages.LoginPage;
 import static org.junit.jupiter.api.Assertions.*;
 import configs.TestPropertiesConfig;
 
-
 public class LoginTest {
 
     private final LoginPage loginPage = new LoginPage();
@@ -18,6 +17,7 @@ public class LoginTest {
         loginPage.enterUsername(config.getUsername());
         loginPage.enterPassword(config.getPassword());
         loginPage.clickLogin();
+
         Thread.sleep(1000);
         assertTrue(loginPage.isLoginSuccessful(), "Вход не удался, хотя ожидался успешный вход");
     }

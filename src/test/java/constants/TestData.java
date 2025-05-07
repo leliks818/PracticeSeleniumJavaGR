@@ -1,6 +1,5 @@
 package constants;
 
-
 public class TestData {
 
     public static final String TEXT_INPUT = "Test Input";

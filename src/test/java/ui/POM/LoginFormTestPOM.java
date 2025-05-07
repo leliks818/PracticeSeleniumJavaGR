@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginFormTestPOM extends BaseTest {
 
-
     @Test
     public void loginFormTest() {
         LoginPage loginPage = new LoginPage(getDriver());

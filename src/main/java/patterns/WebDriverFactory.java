@@ -27,13 +27,13 @@ public static WebDriver createWebDriver(String browser) {
         case CHROME -> getChromeDriver();
         case FIREFOX -> new FirefoxDriver();
         case EDGE -> new EdgeDriver();
-        // Добавьте другие браузеры по необходимости
+
+        // Добавить другие браузеры по необходимости
         default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
     };
     driver.manage().window().maximize();
     return driver;
 }
-
     private static WebDriver getChromeDriver() {
         WebDriver driver;
         String remoteUrl = configProperties.remoteUrl();
@@ -56,5 +56,4 @@ public static WebDriver createWebDriver(String browser) {
         }
         return driver;
     }
-
 }
