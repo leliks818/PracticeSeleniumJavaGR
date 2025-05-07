@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class WorkerLombok {
+public class WorkerLombokPage {
 
     @Data // = генерирует геттеры/сеттеры, toString(), equals(), hashCode()
     @Builder(toBuilder = true) // = позволяет создать объект через .builder() + toBuilder() даёт возможность клонировать и изменять копию

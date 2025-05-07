@@ -1,7 +1,7 @@
 package ui.BilderTests;
 
 import org.junit.jupiter.api.Test;
-import patterns.bilder.LoginLombok;
+import patterns.bilder.LoginLombokPage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +11,7 @@ public class LoginLombokTest {
     @Test
     public void testCreateUserUsingBuilder() {
         // Создание пользователя через Builder
-        LoginLombok.User user = LoginLombok.User.builder()
+        LoginLombokPage.User user = LoginLombokPage.User.builder()
                 .user("john_doe")
                 .password("initial_password")
                 .build();
@@ -25,13 +25,13 @@ public class LoginLombokTest {
     @Test
     public void testChangePasswordUsingToBuilder() {
         // Создание пользователя через Builder
-        LoginLombok.User user = LoginLombok.User.builder()
+        LoginLombokPage.User user = LoginLombokPage.User.builder()
                 .user("alice_smith")
                 .password("old_password")
                 .build();
 
         // Изменение user через toBuilder
-        LoginLombok.User updatedUser = user.toBuilder()
+        LoginLombokPage.User updatedUser = user.toBuilder()
                 .user("Ira123")
                 .build();
 

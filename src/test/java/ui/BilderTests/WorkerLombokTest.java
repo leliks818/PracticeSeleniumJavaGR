@@ -2,7 +2,7 @@ package ui.BilderTests;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import patterns.bilder.WorkerLombok.Worker;
+import patterns.bilder.WorkerLombokPage.Worker;
 
 public class WorkerLombokTest {
 

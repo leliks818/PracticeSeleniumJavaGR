@@ -71,7 +71,7 @@ public class WebFormPage extends BasePage {
     @FindBy(xpath = "//p[@class='lead']")
     private WebElement receivedMessage;
 
-    // ========== Методы (Steps) ==========
+
 //    @Step("Open WebFormPage")
 //    public static void openUrl(String webFormUrl, WebDriver driver) {
 //        driver.get(webFormUrl);

@@ -12,7 +12,7 @@ import java.time.Duration;
 public abstract class BasePage {
 
     protected WebDriver driver;
-    protected final Actions actions;
+    protected Actions actions;
     protected final WebDriverWait wait;
 
     // Конструктор, принимающий уже инициализированный драйвер
