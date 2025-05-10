@@ -21,7 +21,6 @@ public abstract class BaseTest {
     protected WebDriverWait wait10;
     protected WebDriver driver;
     protected TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    public static String TITLE_HEADER = "Hands-On Selenium WebDriver with Java";
 
     @BeforeEach
     void setup() {
@@ -30,7 +29,6 @@ public abstract class BaseTest {
         driver.get(configProperties.baseUrl());  // Открытие базового URL
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));  // Установка времени ожидания
 
-        // Инициализация ожиданий
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -38,7 +36,7 @@ public abstract class BaseTest {
     @AfterEach
     void tearDown() {
         if (driver != null) {
-            driver.quit();  // Закрытие драйвера после каждого теста
+            driver.quit();
         }
     }
 

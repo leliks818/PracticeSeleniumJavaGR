@@ -23,6 +23,13 @@ public class WebFormTest extends BaseTest {
 
     }
     @Test
+    public void testHeaderComponents() {
+        WebFormPage webFormPage = new WebFormPage(getDriver());
+        assertTrue(webFormPage.getHeader().isLogoVisible());
+        assertTrue(webFormPage.getHeader().isTitleHeaderVisible());
+        assertTrue(webFormPage.getHeader().isTitleHeaderTextVisible());
+    }
+    @Test
     public void testTextInput() {
 
         WebFormPage webFormPage = new WebFormPage(getDriver()); // драйвер не передаём
