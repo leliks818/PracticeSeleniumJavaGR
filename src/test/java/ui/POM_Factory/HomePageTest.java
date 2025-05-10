@@ -8,6 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {
 
+
+    @Test
+    public void testHeaderComponents() {
+        HomePage homePage = new HomePage(getDriver());
+        assertTrue(homePage.getHeader().isLogoVisible());
+        assertTrue(homePage.getHeader().isTitleHeaderVisible());
+        assertTrue(homePage.getHeader().isTitleHeaderTextVisible());
+    }
     @Test
     public void testWebFormLink() {
        HomePage homePage = new HomePage(getDriver());
