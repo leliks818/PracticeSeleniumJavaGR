@@ -16,7 +16,6 @@ public class LoginLombokTest {
                 .password("initial_password")
                 .build();
 
-        // Проверка значений полей
         assertEquals("john_doe", user.getUser());
         assertEquals("initial_password", user.getPassword());
     }
@@ -35,9 +34,8 @@ public class LoginLombokTest {
                 .user("Ira123")
                 .build();
 
-        // Проверка изменений
-        assertEquals("alice_smith", updatedUser.getUser());
-        assertEquals("Ira123", updatedUser.getPassword());  // Новый username должен быть обновлён
-        assertNotEquals(user.getUser(), updatedUser.getUser());  // username должен измениться
+        assertEquals("Ira123", updatedUser.getUser());             // Проверяем новое имя
+        assertEquals("old_password", updatedUser.getPassword());   // Пароль не менялся
+        assertNotEquals(user.getUser(), updatedUser.getUser());    // Убедиться, что имя пользователя обновилось
     }
     }

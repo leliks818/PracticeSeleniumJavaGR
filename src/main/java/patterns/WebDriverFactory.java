@@ -1,6 +1,5 @@
 package patterns;
 
-
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -19,41 +18,48 @@ import static com.codeborne.selenide.Browsers.EDGE;
 import static com.codeborne.selenide.Browsers.FIREFOX;
 
 public class WebDriverFactory {
+    // Создаём конфигурацию с настройками из файла
     static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
+    // Основной метод для создания драйвера
+    public static WebDriver createWebDriver(String browser) {
+        WebDriver driver = switch (browser.toLowerCase()) {
+            case CHROME -> getChromeDriver();
+            case FIREFOX -> new FirefoxDriver();
+            case EDGE -> new EdgeDriver();
 
-public static WebDriver createWebDriver(String browser) {
-    WebDriver driver = switch (browser.toLowerCase()) {
-        case CHROME -> getChromeDriver();
-        case FIREFOX -> new FirefoxDriver();
-        case EDGE -> new EdgeDriver();
+            // Добавление новых браузеров по мере необходимости
+            default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+        };
+        driver.manage().window().maximize();
+        return driver;
+    }
 
-        // Добавить другие браузеры по необходимости
-        default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
-    };
-    driver.manage().window().maximize();
-    return driver;
-}
+    // Метод для создания драйвера Chrome
     private static WebDriver getChromeDriver() {
         WebDriver driver;
-        String remoteUrl = configProperties.remoteUrl();
+        // Получаем remoteUrl из конфигурации
+        String remoteUrl = configProperties.remoteUrl();  // Изменено
 
+        // Создаём настройки для Chrome
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // всегда headless
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
+
+        // Если указан remoteUrl, используем RemoteWebDriver, иначе обычный ChromeDriver
         if (remoteUrl != null && !remoteUrl.isBlank()) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
-
             try {
-                driver = new RemoteWebDriver(new URL(remoteUrl), options);
+                driver = new RemoteWebDriver(new URL(remoteUrl), options); //  Оставлено без изменений, но добавлена строка выше
             } catch (MalformedURLException e) {
                 throw new RuntimeException("Malformed URL for Selenium Remote WebDriver", e);
             }
         } else {
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options); //  Изменено: передаём options для headless
         }
+
         return driver;
     }
 }
