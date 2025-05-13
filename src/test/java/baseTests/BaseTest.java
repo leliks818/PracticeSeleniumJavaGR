@@ -28,7 +28,7 @@ public abstract class BaseTest {
         // Вызываем фабрику, которая теперь уже сама настраивает window и таймауты
         driver = initDriver();
         //driver = WebDriverFactory.createWebDriver(configProperties.browser());
-        driver.get(configProperties.baseUrl());
+        //driver.get(configProperties.baseUrl());
 
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
