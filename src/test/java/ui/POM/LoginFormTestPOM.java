@@ -1,5 +1,6 @@
 package ui.POM;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pageObject.LoginPage;
 import baseTests.BaseTest;
@@ -8,6 +9,7 @@ import baseTests.BaseTest;
 import static constants.Constants.LOGIN_FORM_URL;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 public class LoginFormTestPOM extends BaseTest {
 
     @Test

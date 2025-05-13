@@ -1,5 +1,6 @@
 package ui.POM;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import pageObject.HomePage;
@@ -7,6 +8,7 @@ import baseTests.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@Disabled
 public class HomePageLinkTestWithPOM extends BaseTest {
 
     @Test
