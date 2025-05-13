@@ -1,7 +1,6 @@
+
 package patterns;
 
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,6 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Map;
 
 import static com.codeborne.selenide.Browsers.CHROME;
@@ -18,46 +18,49 @@ import static com.codeborne.selenide.Browsers.EDGE;
 import static com.codeborne.selenide.Browsers.FIREFOX;
 
 public class WebDriverFactory {
-    // Создаём конфигурацию с настройками из файла
-    static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
-    // Основной метод для создания драйвера
+
+/// ЗАКОМИТЕЛА Т.К внутри класса WebDriverFactory ты больше не использую
+/// configProperties, а, перешла на System.getenv("SELENIUM_REMOTE_URL").
+   // static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+
+    // Основной метод для создания драйвера с настройками
     public static WebDriver createWebDriver(String browser) {
         WebDriver driver = switch (browser.toLowerCase()) {
             case CHROME -> getChromeDriver();
             case FIREFOX -> new FirefoxDriver();
             case EDGE -> new EdgeDriver();
-
-            // Добавление новых браузеров по мере необходимости
             default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
         };
+
+        //  добавили
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         return driver;
     }
 
-    // Метод для создания драйвера Chrome
+    // Метод для Chrome, поддерживает локальный и remote режим
     private static WebDriver getChromeDriver() {
         WebDriver driver;
-        // Получаем remoteUrl из конфигурации
-        String remoteUrl = configProperties.remoteUrl();  // Изменено
+        String remoteUrl = System.getenv("SELENIUM_REMOTE_URL");
 
-        // Создаём настройки для Chrome
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // всегда headless
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
-
-        // Если указан remoteUrl, используем RemoteWebDriver, иначе обычный ChromeDriver
         if (remoteUrl != null && !remoteUrl.isBlank()) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
+
             try {
-                driver = new RemoteWebDriver(new URL(remoteUrl), options); //  Оставлено без изменений, но добавлена строка выше
+                driver = new RemoteWebDriver(new URL(remoteUrl), options);
+                System.out.println("🔧 Remote WebDriver запущен по адресу: " + remoteUrl);
             } catch (MalformedURLException e) {
                 throw new RuntimeException("Malformed URL for Selenium Remote WebDriver", e);
             }
         } else {
-            driver = new ChromeDriver(options); //  Изменено: передаём options для headless
+            driver = new ChromeDriver();
+            System.out.println("🖥️ Локальный ChromeDriver запущен");
         }
 
         return driver;
