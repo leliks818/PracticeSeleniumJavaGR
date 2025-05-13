@@ -11,17 +11,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import patterns.WebDriverFactory;
 import java.time.Duration;
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import patterns.WebDriverFactory;
 
-import java.time.Duration;
+
+import static patterns.WebDriverFactory.initDriver;
 
 public abstract class BaseTest {
 
@@ -33,7 +26,8 @@ public abstract class BaseTest {
     @BeforeEach
     void setup() {
         // Вызываем фабрику, которая теперь уже сама настраивает window и таймауты
-        driver = WebDriverFactory.createWebDriver(configProperties.browser());
+        driver = initDriver();
+        //driver = WebDriverFactory.createWebDriver(configProperties.browser());
         driver.get(configProperties.baseUrl());
 
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));

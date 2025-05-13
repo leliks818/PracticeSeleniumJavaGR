@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginFormTest extends BaseTest {
 
-//    @Test
-//    public void testHeaderComponents() {
-//        LoginPage loginPage = new LoginPage(getDriver());
-//        HeaderComponent header = loginPage.getHeader();
-//        assertTrue(header.isLogoVisible());
-//        assertTrue(header.isTitleHeaderVisible());
-//        assertTrue(header.isTitleHeaderTextVisible());
-//    }
     @Test
     public void testHeaderComponents() {
         LoginPage loginPage = new LoginPage(getDriver());
@@ -34,6 +26,7 @@ public class LoginFormTest extends BaseTest {
         loginPage.enterUsername(configProperties.getUsername());
         loginPage.enterPassword(configProperties.getPassword());
         loginPage.clickLogin();
+
         assertTrue(loginPage.isLoginSuccessful(), "Сообщение об успешном входе не появилось");
 
     }
