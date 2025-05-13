@@ -46,7 +46,7 @@ jobs:
       env:
         SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
         PASSWORD_INPUT: ${{ secrets.PASSWORD }}
-      run: ./gradlew test -Dpassword=$PASSWORD_INPUT  // ✅ это подставляет значение переменной
+      run: ./gradlew test -Dpassword=$PASSWORD_INPUT
 
 
 
