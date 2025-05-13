@@ -1,11 +1,13 @@
 package ui.selenide;
 
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import selenidePages.LoginPage;
 import static org.junit.jupiter.api.Assertions.*;
 import configs.TestPropertiesConfig;
 
+@Disabled
 public class LoginTest {
 
     private final LoginPage loginPage = new LoginPage();

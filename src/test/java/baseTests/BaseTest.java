@@ -13,7 +13,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import patterns.WebDriverFactory;
 import java.time.Duration;
+import configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import patterns.WebDriverFactory;
 
+import java.time.Duration;
 
 public abstract class BaseTest {
 
@@ -24,10 +32,9 @@ public abstract class BaseTest {
 
     @BeforeEach
     void setup() {
+        // Вызываем фабрику, которая теперь уже сама настраивает window и таймауты
         driver = WebDriverFactory.createWebDriver(configProperties.browser());
-        driver.manage().window().maximize();
-        driver.get(configProperties.baseUrl());  // Открытие базового URL
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));  // Установка времени ожидания
+        driver.get(configProperties.baseUrl());
 
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -39,6 +46,34 @@ public abstract class BaseTest {
             driver.quit();
         }
     }
+
+
+
+//
+//public abstract class BaseTest {
+//
+//    protected WebDriverWait wait5;
+//    protected WebDriverWait wait10;
+//    protected WebDriver driver;
+//    protected TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+//
+//    @BeforeEach
+//    void setup() {
+//        driver = WebDriverFactory.createWebDriver(configProperties.browser());
+//        driver.manage().window().maximize();
+//        driver.get(configProperties.baseUrl());  // Открытие базового URL
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));  // Установка времени ожидания
+//
+//        wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
+//    }
+//
+//    @AfterEach
+//    void tearDown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
     protected WebDriver getDriver() {
         return driver;

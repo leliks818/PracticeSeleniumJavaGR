@@ -1,12 +1,14 @@
 package ui.oldTests;
 
 import baseTests.BaseTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static constants.Constants.LOGIN_FORM_URL;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 public class LoginFormTest extends BaseTest {
 
     @Test

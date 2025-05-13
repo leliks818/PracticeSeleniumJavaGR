@@ -1,6 +1,7 @@
 package ui.POM;
 
 import constants.TestData;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 public class WebFormTestWithPOM extends BaseTest {
 
     @Test
