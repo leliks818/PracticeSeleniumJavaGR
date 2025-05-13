@@ -21,6 +21,7 @@ public interface TestPropertiesConfig extends Config {
     String getInvalidPassword();
 
     @Key("browser")
+    @DefaultValue("chrome")
     String browser();
 
     @Key("remoteUrl")
