@@ -29,7 +29,7 @@ public abstract class BaseTest {
         driver = initDriver();
         //driver = WebDriverFactory.createWebDriver(configProperties.browser());
         //driver.get(configProperties.baseUrl());
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -42,32 +42,6 @@ public abstract class BaseTest {
     }
 
 
-
-//
-//public abstract class BaseTest {
-//
-//    protected WebDriverWait wait5;
-//    protected WebDriverWait wait10;
-//    protected WebDriver driver;
-//    protected TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-//
-//    @BeforeEach
-//    void setup() {
-//        driver = WebDriverFactory.createWebDriver(configProperties.browser());
-//        driver.manage().window().maximize();
-//        driver.get(configProperties.baseUrl());  // Открытие базового URL
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));  // Установка времени ожидания
-//
-//        wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
-//        wait10 = new WebDriverWait(driver, Duration.ofSeconds(10));
-//    }
-//
-//    @AfterEach
-//    void tearDown() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
 
     protected WebDriver getDriver() {
         return driver;

@@ -1,14 +1,20 @@
 package ui.POM_Factory;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import baseTests.BaseTest;
 import pageObjectFactory.HomePage;
 
+import static constants.Constants.BASE_URL;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HomePageTest extends BaseTest {
 
+    @BeforeEach
+    public void setUpTest() {
+        getDriver().get(BASE_URL);
 
+    }
     @Test
     public void testHeaderComponents() {
         HomePage homePage = new HomePage(getDriver());
