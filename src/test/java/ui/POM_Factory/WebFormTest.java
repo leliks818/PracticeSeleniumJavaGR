@@ -85,15 +85,29 @@ public class WebFormTest extends BaseTest {
         assertEquals(SELECT_OPTION, webFormPage.getSelectedOption());
     }
 
+//    @Test
+//    public void testFileUpload() {
+//        WebFormPage webFormPage = new WebFormPage(driver);
+//        webFormPage.uploadFile(FILE_PATH);
+//        assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
+//        System.out.println("Путь к файлу: " + FILE_PATH);
+//        System.out.println("Существует ли файл: " + new File(FILE_PATH).exists());
+//
+//    }
     @Test
     public void testFileUpload() {
-        WebFormPage webFormPage = new WebFormPage(driver);
-        webFormPage.uploadFile(FILE_PATH);
-        assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
-        System.out.println("Путь к файлу: " + FILE_PATH);
-        System.out.println("Существует ли файл: " + new File(FILE_PATH).exists());
+    System.out.println("Рабочая директория: " + System.getProperty("user.dir"));
+    System.out.println("Путь к файлу: " + FILE_PATH);
 
-    }
+    File file = new File(FILE_PATH);
+    System.out.println("Существует ли файл на CI: " + file.exists());
+
+    WebFormPage webFormPage = new WebFormPage(driver);
+    webFormPage.uploadFile(FILE_PATH);
+
+    assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
+}
+
 
     @Test
     public void testColorPicker() {

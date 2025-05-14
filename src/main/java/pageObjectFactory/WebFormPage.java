@@ -149,7 +149,6 @@ public class WebFormPage extends BasePage {
         fileInput.sendKeys(absolutePath);
     }
 
-
     public String getUploadedFilePath() {
         return fileInput.getAttribute("value");
     }
