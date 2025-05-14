@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import baseTests.BaseTest;
 import pageObjectFactory.WebFormPage;
 
+import java.io.File;
 import java.time.Duration;
 
 import static constants.Constants.WEB_FORM_URL;
@@ -89,6 +90,9 @@ public class WebFormTest extends BaseTest {
         WebFormPage webFormPage = new WebFormPage(driver);
         webFormPage.uploadFile(FILE_PATH);
         assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
+        System.out.println("Путь к файлу: " + FILE_PATH);
+        System.out.println("Существует ли файл: " + new File(FILE_PATH).exists());
+
     }
 
     @Test
