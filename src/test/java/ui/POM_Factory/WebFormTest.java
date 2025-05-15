@@ -94,7 +94,6 @@ public class WebFormTest extends BaseTest {
 //
 //    }
 
-    public static final String FILE_PATH = "build/uploads/java.png";
 
     @Test
     public void testFileUpload() throws URISyntaxException {
@@ -102,7 +101,6 @@ public class WebFormTest extends BaseTest {
         webFormPage.uploadFile(FILE_PATH);
         assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
     }
-
 
     @Test
     public void testColorPicker() {

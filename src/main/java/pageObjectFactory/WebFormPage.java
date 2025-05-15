@@ -3,6 +3,8 @@ package pageObjectFactory;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
 
@@ -166,20 +168,20 @@ public class WebFormPage extends BasePage {
 //    }
     @Step("Загрузка файла: {path}")
     public void uploadFile(String path) throws URISyntaxException {
-    File file = new File(path);
-
-    if (!file.exists()) {
-        // Если файл не найден по файловой системе (например, локально),
-        // пытаемся загрузить из ресурсов (classpath)
-        URL resource = getClass().getClassLoader().getResource(path);
-        if (resource == null) {
-            throw new IllegalArgumentException("Файл не найден ни по пути: " + path + " ни в ресурсах.");
-        }
-        file = Paths.get(resource.toURI()).toFile();
+    URL resource = getClass().getClassLoader().getResource(path);
+    if (resource == null) {
+        throw new IllegalArgumentException("Файл не найден: " + path);
     }
 
-    System.out.println("Абсолютный путь: " + file.getAbsolutePath());
-    fileInput.sendKeys(file.getAbsolutePath());
+    File file = Paths.get(resource.toURI()).toFile();
+    String absolutePath = file.getAbsolutePath();
+
+    // Только для удалённого драйвера
+    if (driver.getClass().equals(RemoteWebDriver.class)) {
+        ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
+    }
+
+    fileInput.sendKeys(absolutePath);
 }
 
 
@@ -187,6 +189,7 @@ public class WebFormPage extends BasePage {
     public String getUploadedFilePath() {
         return fileInput.getAttribute("value");
     }
+
 
     @Step("Установка чекбокса")
     public void clickCheckbox() {

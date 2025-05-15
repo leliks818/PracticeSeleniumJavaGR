@@ -50,14 +50,14 @@ tasks.test {
     testLogging {
         events 'passed', 'skipped', 'failed' // Вывод событий в лог
     }
-    // Задача копирования файла
-    task copyUploadFile(type: Copy) {
-        from 'src/test/resources/uploads'
-        into 'build/uploads'
-    }
-
-    tasks.test {
-        dependsOn copyUploadFile
-    }
+//    // Задача копирования файла
+//    task copyUploadFile(type: Copy) {
+//        from 'src/test/resources/uploads'
+//        into 'build/uploads'
+//    }
+//
+//    tasks.test {
+//        dependsOn copyUploadFile
+//    }
 
 }
