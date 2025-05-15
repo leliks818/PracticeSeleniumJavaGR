@@ -15,12 +15,10 @@ public abstract class BasePage {
         return title();
     }
 
-    // Ожидание, пока элемент не станет видимым
     public void waitUntilVisible(SelenideElement element) {
         element.shouldBe(Condition.visible);
     }
 
-    // Ожидание, пока элемент не станет доступным для взаимодействия
     public void waitUntilEnabled(SelenideElement element) {
         element.shouldBe(Condition.enabled);
     }

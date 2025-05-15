@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Browsers.FIREFOX;
 public class WebDriverFactory {
 
 
-    /// ЗАКОМИТЕЛА Т.К внутри класса WebDriverFactory ты больше не использую
+    /// ЗАКОМИТЕЛА Т.К внутри класса WebDriverFactory больше не использую
     /// configProperties, а, перешла на System.getenv("SELENIUM_REMOTE_URL").
     // static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
@@ -35,7 +35,6 @@ public class WebDriverFactory {
             default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
         };
 
-        //  добавили
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         return driver;

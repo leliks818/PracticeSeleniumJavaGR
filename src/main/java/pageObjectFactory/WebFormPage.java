@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
+import java.net.URL;
 import java.time.Duration;
 
 public class WebFormPage extends BasePage {
@@ -142,12 +143,24 @@ public class WebFormPage extends BasePage {
         return datalistInput.getAttribute("value");
     }
 
+//    @Step("Загрузка файла: {path}")
+//    public void uploadFile(String path) {
+//        File file = new File(path);
+//        String absolutePath = file.getAbsolutePath();
+//        fileInput.sendKeys(absolutePath);
+//    }
+
     @Step("Загрузка файла: {path}")
     public void uploadFile(String path) {
-        File file = new File(path);
-        String absolutePath = file.getAbsolutePath();
-        fileInput.sendKeys(absolutePath);
+        URL resource = getClass().getClassLoader().getResource(path);
+        if (resource == null) {
+            throw new IllegalArgumentException("Файл не найден: " + path);
+        }
+        File file = new File(resource.getFile());
+        System.out.println("Абсолютный путь: " + file.getAbsolutePath());
+        fileInput.sendKeys(file.getAbsolutePath());
     }
+
 
     public String getUploadedFilePath() {
         return fileInput.getAttribute("value");
@@ -187,10 +200,6 @@ public class WebFormPage extends BasePage {
 
     public String getDateValue() {
         return dateInput.getAttribute("value");
-    }
-
-    public String getSliderValue() {
-        return slider.getDomAttribute("value");
     }
 
     @Step("Перемещение слайдера на смещение: {offset}")

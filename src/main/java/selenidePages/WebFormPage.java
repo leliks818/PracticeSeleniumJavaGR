@@ -57,70 +57,9 @@ public class WebFormPage extends BasePage {
         return submitTitleReturnLink.shouldBe(Condition.visible).getText();
     }
 
-
-    public void selectOption(String option) {
-        selectDropdown.selectOption(option);
-    }
-
-    public SelenideElement getSelectedOption() {
-        return selectDropdown.getSelectedOption();
-    }
-
-    public void uploadFile(String filePath) {
-        fileUpload.uploadFile(new java.io.File(filePath));
-    }
-
-    public String getUploadedFilePath() {
-        return fileUpload.getValue();
-    }
-
-    public void pickColor(String color) {
-        colorPicker.setValue(color);
-    }
-
-    public String getColorValue() {
-        return colorPicker.getValue();
-    }
-
-    public void enterDate(String date) {
-        dateInput.setValue(date);
-    }
-
-    public String getDateValue() {
-        return dateInput.getValue();
-    }
-
-    public void clickCheckbox() {
-        checkbox.click();
-    }
-
-    public boolean isCheckboxSelected() {
-        return checkbox.isSelected();
-    }
-
-    public void clickRadioButton() {
-        radioButton.click();
-    }
-
-    public boolean isRadioButtonSelected() {
-        return radioButton.isSelected();
-    }
-
     @Step("Отправка формы")
     public void clickSubmit() {
         submitButton.shouldBe(Condition.visible).click();
-    }
-
-    public String getSubmitTitle() {
-        return submitTitle.shouldBe(Condition.visible).getText();
-    }
-
-    public boolean isReceivedDisplayed() {
-        return receivedMessage.shouldBe(Condition.visible).isDisplayed();
-    }
-
-    public void waitForSubmission() {
-        submitTitle.shouldBe(Condition.visible);
     }
 
     public String getTextFieldValue() {
