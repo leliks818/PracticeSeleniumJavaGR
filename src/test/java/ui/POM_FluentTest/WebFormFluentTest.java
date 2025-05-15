@@ -4,6 +4,9 @@ import FluentPageObject.WebFormFluentPage;
 import baseTests.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.net.URISyntaxException;
+
 import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +19,7 @@ public class WebFormFluentTest extends BaseTest {
     }
 
     @Test
-    public void testWebFormFluentPage() {
+    public void testWebFormFluentPage() throws URISyntaxException {
         WebFormFluentPage webFormPage = new WebFormFluentPage(getDriver());
 
         webFormPage
