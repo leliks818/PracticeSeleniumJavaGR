@@ -9,6 +9,7 @@ import baseTests.BaseTest;
 import pageObjectFactory.WebFormPage;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.time.Duration;
 
 import static constants.Constants.WEB_FORM_URL;
@@ -86,7 +87,7 @@ public class WebFormTest extends BaseTest {
     }
 
     @Test
-    public void testFileUpload() {
+    public void testFileUpload() throws URISyntaxException {
         WebFormPage webFormPage = new WebFormPage(driver);
         webFormPage.uploadFile(FILE_PATH);
         assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));

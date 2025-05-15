@@ -7,7 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 public class WebFormPage extends BasePage {
@@ -151,12 +153,14 @@ public class WebFormPage extends BasePage {
 //    }
 
     @Step("Загрузка файла: {path}")
-    public void uploadFile(String path) {
+    public void uploadFile(String path) throws URISyntaxException {
         URL resource = getClass().getClassLoader().getResource(path);
         if (resource == null) {
             throw new IllegalArgumentException("Файл не найден: " + path);
         }
-        File file = new File(resource.getFile());
+        // File file = new File(resource.getFile());
+        File file = Paths.get(resource.toURI()).toFile();
+
         System.out.println("Абсолютный путь: " + file.getAbsolutePath());
         fileInput.sendKeys(file.getAbsolutePath());
     }
