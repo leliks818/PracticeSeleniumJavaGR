@@ -152,18 +152,36 @@ public class WebFormPage extends BasePage {
 //        fileInput.sendKeys(absolutePath);
 //    }
 
+//    @Step("Загрузка файла: {path}")
+//    public void uploadFile(String path) throws URISyntaxException {
+//        URL resource = getClass().getClassLoader().getResource(path);
+//        if (resource == null) {
+//            throw new IllegalArgumentException("Файл не найден: " + path);
+//        }
+//        // File file = new File(resource.getFile());
+//        File file = Paths.get(resource.toURI()).toFile();
+//
+//        System.out.println("Абсолютный путь: " + file.getAbsolutePath());
+//        fileInput.sendKeys(file.getAbsolutePath());
+//    }
     @Step("Загрузка файла: {path}")
     public void uploadFile(String path) throws URISyntaxException {
+    File file = new File(path);
+
+    if (!file.exists()) {
+        // Если файл не найден по файловой системе (например, локально),
+        // пытаемся загрузить из ресурсов (classpath)
         URL resource = getClass().getClassLoader().getResource(path);
         if (resource == null) {
-            throw new IllegalArgumentException("Файл не найден: " + path);
+            throw new IllegalArgumentException("Файл не найден ни по пути: " + path + " ни в ресурсах.");
         }
-        // File file = new File(resource.getFile());
-        File file = Paths.get(resource.toURI()).toFile();
-
-        System.out.println("Абсолютный путь: " + file.getAbsolutePath());
-        fileInput.sendKeys(file.getAbsolutePath());
+        file = Paths.get(resource.toURI()).toFile();
     }
+
+    System.out.println("Абсолютный путь: " + file.getAbsolutePath());
+    fileInput.sendKeys(file.getAbsolutePath());
+}
+
 
 
     public String getUploadedFilePath() {

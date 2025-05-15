@@ -1,57 +1,63 @@
+// Подключение необходимых плагинов
 plugins {
-    id 'java'
-    id 'io.qameta.allure' version '2.12.0'
-    id("io.freefair.lombok") version "8.13.1"
-    }
+    id 'java' // Поддержка Java проекта
+    id 'io.qameta.allure' version '2.12.0' // Для генерации отчетов Allure
+    id("io.freefair.lombok") version "8.13.1" // Поддержка Lombok
+}
 
-
+// Настройки группы и версии проекта
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
+// Репозиторий, откуда будут скачиваться зависимости
 repositories {
     mavenCentral()
 }
 
+// Подключение зависимостей проекта
 dependencies {
-    // JUnit для тестов
+    // JUnit 5 для написания и запуска тестов
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    // Selenium для работы с браузером
+    // Selenium WebDriver для автоматизации браузера
     implementation 'org.seleniumhq.selenium:selenium-java:4.29.0'
 
-    // Selenide
+    // Библиотека Selenide (надстройка над Selenium)
     implementation 'com.codeborne:selenide:7.8.1'
 
-    // Owner для работы с properties файлами
+    // Библиотека Owner для работы с .properties файлами
     implementation 'org.aeonbits.owner:owner:1.0.12'
 
-    // Утверждения для тестов
+    // AssertJ для более читаемых проверок в тестах
     testImplementation 'org.assertj:assertj-core:4.0.0-M1'
 
-    // Allure для отчетности
+    // Allure адаптеры для JUnit 5 и REST Assured
     testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
     implementation 'io.qameta.allure:allure-rest-assured:2.29.1'
 
-    //lombok dependencies
+    // Lombok — генерация геттеров, сеттеров и др. аннотаций
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
+// Настройки задачи тестирования
 tasks.test {
-    useJUnitPlatform()
-
-    systemProperties(System.getProperties())
-
+    useJUnitPlatform() // Использовать JUnit 5
+    systemProperties(System.getProperties()) // Передавать системные свойства (например, логин/пароль)
     testLogging {
-        events 'passed', 'skipped', 'failed'
+        events 'passed', 'skipped', 'failed' // Вывод событий в лог
     }
-}
+    // Задача копирования файла
+    task copyUploadFile(type: Copy) {
+        from 'src/test/resources/uploads'
+        into 'build/uploads'
+    }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+    tasks.test {
+        dependsOn copyUploadFile
     }
+
 }

@@ -85,13 +85,22 @@ public class WebFormTest extends BaseTest {
         webFormPage.selectOption(SELECT_OPTION);
         assertEquals(SELECT_OPTION, webFormPage.getSelectedOption());
     }
+//
+//    @Test
+//    public void testFileUpload() throws URISyntaxException {
+//        WebFormPage webFormPage = new WebFormPage(driver);
+//        webFormPage.uploadFile(FILE_PATH);
+//        assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
+//
+//    }
+
+    public static final String FILE_PATH = "build/uploads/java.png";
 
     @Test
     public void testFileUpload() throws URISyntaxException {
         WebFormPage webFormPage = new WebFormPage(driver);
         webFormPage.uploadFile(FILE_PATH);
         assertTrue(webFormPage.getUploadedFilePath().contains("java.png"));
-
     }
 
 
