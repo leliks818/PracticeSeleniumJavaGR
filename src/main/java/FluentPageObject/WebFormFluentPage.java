@@ -2,19 +2,21 @@ package FluentPageObject;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjectFactory.BasePage;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.time.Duration;
 
 public class WebFormFluentPage extends BasePage {
 
@@ -123,10 +125,22 @@ public class WebFormFluentPage extends BasePage {
         returnLink.click();
         return this;
     }
+//
+//    @Step("Получаем заголовок после отправки")
+//    public String getSubmitTitle() {
+//        return submitTitle.getText();
+//    }
 
     @Step("Получаем заголовок после отправки")
     public String getSubmitTitle() {
-        return submitTitle.getText();
+        try {
+            return submitTitle.getText();
+        } catch (StaleElementReferenceException e) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            return wait.until(ExpectedConditions
+                            .visibilityOfElementLocated(By.xpath("//h1[@class='display-6']")))
+                    .getText();
+        }
     }
 
     @Step("Проверяем отображение блока Received")
