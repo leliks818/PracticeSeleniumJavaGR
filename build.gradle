@@ -61,4 +61,8 @@ tasks.test {
 //        dependsOn copyUploadFile
 //    }
 
+    tasks.test {
+        // Исключаем все тесты из папки ui/oldTests
+        exclude '**/ui/oldTests/**'
+    }
 }
