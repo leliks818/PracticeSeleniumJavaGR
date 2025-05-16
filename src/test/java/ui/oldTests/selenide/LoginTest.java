@@ -1,4 +1,4 @@
-package ui.selenide;
+package ui.oldTests.selenide;
 
 import extensions.AllureExtension;
 import org.aeonbits.owner.ConfigFactory;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import selenidePages.LoginPage;
 import static org.junit.jupiter.api.Assertions.*;
 import configs.TestPropertiesConfig;
+
 
 @ExtendWith(AllureExtension.class)
 public class LoginTest {

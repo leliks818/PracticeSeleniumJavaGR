@@ -1,4 +1,4 @@
-package ui.selenide;
+package ui.oldTests.selenide;
 
 import com.codeborne.selenide.WebDriverRunner;
 import extensions.AllureExtension;
