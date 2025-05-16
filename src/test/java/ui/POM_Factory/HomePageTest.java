@@ -1,13 +1,18 @@
 package ui.POM_Factory;
 
+import extensions.AllureExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import baseTests.BaseTest;
+import org.junit.jupiter.api.extension.ExtendWith;
 import pageObjectFactory.HomePage;
 
 import static constants.Constants.BASE_URL;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("smoke")
+@ExtendWith(AllureExtension.class)
 public class HomePageTest extends BaseTest {
 
     @BeforeEach

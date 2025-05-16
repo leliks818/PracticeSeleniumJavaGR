@@ -1,12 +1,17 @@
 package ui.POM_Factory;
 
+import extensions.AllureExtension;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import pageObjectFactory.LoginPage;
 import baseTests.BaseTest;
 import static constants.Constants.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("smoke")
+@ExtendWith(AllureExtension.class)
 public class LoginFormTest extends BaseTest {
 
     @Test

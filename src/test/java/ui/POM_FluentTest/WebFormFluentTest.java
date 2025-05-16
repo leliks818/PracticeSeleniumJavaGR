@@ -2,8 +2,11 @@ package ui.POM_FluentTest;
 
 import FluentPageObject.WebFormFluentPage;
 import baseTests.BaseTest;
+import extensions.AllureExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.net.URISyntaxException;
 
@@ -11,6 +14,9 @@ import static constants.Constants.WEB_FORM_URL;
 import static constants.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+
+@Tag("smoke")
+@ExtendWith(AllureExtension.class)
 public class WebFormFluentTest extends BaseTest {
 
     @BeforeEach

@@ -1,6 +1,7 @@
 package ui.POM_Factory;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +18,7 @@ import static constants.TestData.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("smoke")
 public class WebFormTest extends BaseTest {
 
     @BeforeEach

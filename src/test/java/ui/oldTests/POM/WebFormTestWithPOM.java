@@ -1,4 +1,4 @@
-package ui.POM;
+package ui.oldTests.POM;
 
 import constants.TestData;
 import org.junit.jupiter.api.Disabled;

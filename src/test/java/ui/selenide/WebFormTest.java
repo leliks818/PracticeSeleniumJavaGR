@@ -1,9 +1,11 @@
 package ui.selenide;
 
 import com.codeborne.selenide.WebDriverRunner;
+import extensions.AllureExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import selenidePages.BasePage;
 import selenidePages.WebFormPage;
 import static com.codeborne.selenide.Selenide.*;
@@ -12,7 +14,7 @@ import static constants.TestData.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
+@ExtendWith(AllureExtension.class)
 public class WebFormTest extends BasePage {
 
     @BeforeEach

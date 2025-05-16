@@ -1,13 +1,15 @@
 package ui.selenide;
 
+import extensions.AllureExtension;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import selenidePages.LoginPage;
 import static org.junit.jupiter.api.Assertions.*;
 import configs.TestPropertiesConfig;
 
-@Disabled
+@ExtendWith(AllureExtension.class)
 public class LoginTest {
 
     private final LoginPage loginPage = new LoginPage();
